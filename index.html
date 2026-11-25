@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#06152b">
+  <title>PromptGen AI — Master AI Prompting in Seconds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="backdrop-glow glow-a"></div>
+  <div class="backdrop-glow glow-b"></div>
+
+  <main id="auth-screen" class="auth-screen">
+    <div class="auth-card">
+      <a class="brand auth-brand" href="#">
+        <span class="brand-symbol">➤</span>
+        <span>PromptGen<span>AI</span></span>
+      </a>
+
+      <div class="auth-heading">
+        <div class="mini-kicker">YOUR PERSONAL PROMPT STUDIO</div>
+        <h1 id="auth-title">Welcome back</h1>
+        <p id="auth-subtitle">Sign in and turn your ideas into powerful prompts.</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="show-login">Login</button>
+        <button class="auth-tab" id="show-signup">Create account</button>
+      </div>
+
+      <form id="auth-form">
+        <div class="field" id="name-field" hidden>
+          <label for="auth-name">Your name</label>
+          <input id="auth-name" type="text" placeholder="Enter your name" autocomplete="name">
+        </div>
+
+        <div class="field">
+          <label for="auth-email">Email address</label>
+          <input id="auth-email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="auth-password">Password</label>
+          <input id="auth-password" type="password" placeholder="At least 6 characters" minlength="6" autocomplete="current-password" required>
+        </div>
+
+        <div class="auth-error" id="auth-error" role="alert"></div>
+
+        <button class="primary-button auth-submit" type="submit">
+          <span id="auth-submit-text">Sign in</span>
+          <b>↗</b>
+        </button>
+      </form>
+
+      <p class="auth-foot">By continuing, you agree to use PromptGen AI responsibly.</p>
+    </div>
+
+    <div class="auth-side-note">
+      <span class="pulse-dot"></span> A smarter way to talk to AI
+    </div>
+  </main>
+
+  <div id="app-screen" class="app-screen" hidden>
+    <aside class="sidebar" id="sidebar">
+
+      <a class="brand sidebar-brand" href="#">
+        <span class="brand-symbol">➤</span>
+        <span>PromptGen<span>AI</span></span>
+      </a>
+
+      <div class="side-caption">WORKSPACE</div>
+
+      <nav class="side-nav">
+        <button class="nav-item active" data-view="builder">
+          <span class="nav-icon">≋</span> Prompt Builder
+        </button>
+
+        <button class="nav-item" data-view="chat">
+          <span class="nav-icon">▢</span> Chat
+          <span class="nav-tag">NEW</span>
+        </button>
+
+        <button class="nav-item" data-view="history">
+          <span class="nav-icon">◷</span> History
+        </button>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="credits-card">
+        <div class="credits-top">
+          <span>✦ Prompt Credits</span>
+          <strong id="credit-count">25</strong>
+        </div>
+        <div class="credit-track"><span></span></div>
+        <button id="credits-button" class="purchase-button">
+          ＋ &nbsp; Get more credits
+        </button>
+        <small>Demo workspace · No payment required</small>
+      </div>
+
+      <div class="profile">
+        <div class="avatar" id="user-avatar">U</div>
+        <div class="profile-copy">
+          <strong id="user-name">User</strong>
+          <span id="user-email">user@example.com</span>
+        </div>
+        <button class="profile-menu" id="profile-menu" title="Account menu">•••</button>
+      </div>
+
+      <button class="logout-button" id="logout-button">
+        ↪ &nbsp; Log out
+      </button>
+    </aside>
+
+    <section class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu">☰</button>
+
+        <div class="breadcrumb">
+          Workspace <span>/</span>
+          <strong id="breadcrumb-current">Prompt Builder</strong>
+        </div>
+
+        <div class="topbar-right">
+          <span class="online-pill"><i></i> All systems ready</span>
+          <button class="help-button" id="help-button">? <span>Help</span></button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="page-heading">
+          <div>
+            <div class="mini-kicker">PROMPT ENGINEERING, MADE SIMPLE</div>
+            <h1 id="page-title">Master AI Prompting <span>in Seconds</span></h1>
+            <p id="page-description">
+              Describe what you need. We'll shape your idea into a clear, powerful English prompt.
+            </p>
+          </div>
+          <div class="heading-orb">✧</div>
+        </section>
+
+        <section id="builder-view" class="builder-layout">
+          <div class="builder-card glass-card">
+
+            <div class="card-title-row">
+              <div>
+                <div class="section-index">01 <span>YOUR REQUEST</span></div>
+                <h2>Describe your task</h2>
+                <p>Write or speak naturally in the language you prefer.</p>
+              </div>
+              <span class="card-icon">✎</span>
+            </div>
+
+            <label class="input-label" for="task-input">
+              Describe your task <em>(required)</em>
+            </label>
+
+            <div class="task-wrap">
+              <textarea id="task-input" placeholder="e.g. I need a modern portfolio website with a dark theme, smooth animations and a responsive layout...
+
+آپ اپنی بات اردو میں بھی لکھ سکتے ہیں۔"></textarea>
+
+              <div class="task-bottom">
+                <span id="task-count">0 / 1500</span>
+                <button id="clear-task">Clear</button>
+              </div>
+            </div>
+
+            <div class="input-tools">
+              <div class="voice-group">
+                <select id="voice-language" aria-label="Voice language">
+                  <option value="ur-PK">Urdu voice</option>
+                  <option value="hi-IN">Hindi voice</option>
+                  <option value="en-US">English voice</option>
+                  <option value="de-DE">German voice</option>
+                  <option value="fr-FR">French voice</option>
+                  <option value="es-ES">Spanish voice</option>
+                  <option value="ar-SA">Arabic voice</option>
+                  <option value="tr-TR">Turkish voice</option>
+                  <option value="it-IT">Italian voice</option>
+                  <option value="zh-CN">Chinese voice</option>
+                  <option value="ja-JP">Japanese voice</option>
+                  <option value="ru-RU">Russian voice</option>
+                  <option value="bn-BD">Bengali voice</option>
+                  <option value="pt-PT">Portuguese voice</option>
+                </select>
+
+                <button class="voice-button" id="voice-button">
+                  🎙 <span id="voice-label">Speak</span>
+                </button>
+              </div>
+
+              <span class="tiny-hint">Text input supports any language</span>
+            </div>
+
+            <div class="attach-row">
+              <div>
+                <span class="attach-icon">⌁</span>
+                <span>
+                  <strong>Attach reference files</strong>
+                  <small>Optional · Up to 3 files</small>
+                </span>
+              </div>
+
+              <label class="attach-button" for="file-input">＋ Add files</label>
+              <input id="file-input" type="file" multiple hidden accept=".txt,.pdf,.doc,.docx,.png,.jpg,.jpeg,.webp">
+            </div>
+
+            <div id="file-list" class="file-list"></div>
+
+            <div class="accordion-list">
+
+              <details class="setting-accordion">
+                <summary>
+                  <span><b>✦</b> AI Setup</span>
+                  <small>Choose your prompt style</small>
+                  <i>⌄</i>
+                </summary>
+
+                <div class="accordion-body">
+                  <label for="ai-tool">Target AI tool</label>
+                  <select id="ai-tool">
+                    <option>Any AI assistant</option>
+                    <option>ChatGPT</option>
+                    <option>Google Gemini</option>
+                    <option>Claude</option>
+                    <option>GitHub Copilot</option>
+                    <option>Midjourney</option>
+                    <option>Other AI tool</option>
+                  </select>
+
+                  <label for="expertise">Role / expertise</label>
+                  <select id="expertise">
+                    <option>Choose the best expert automatically</option>
+                    <option>Senior web developer</option>
+                    <option>UI/UX designer</option>
+                    <option>Software engineer</option>
+                    <option>Marketing strategist</option>
+                    <option>Creative writer</option>
+                    <option>Research analyst</option>
+                    <option>Teacher / tutor</option>
+                  </select>
+                </div>
+              </details>
+
+              <details class="setting-accordion">
+                <summary>
+                  <span><b>⌘</b> Context</span>
+                  <small>Add useful background</small>
+                  <i>⌄</i>
+                </summary>
+
+                <div class="accordion-body">
+                  <label for="context-input">Background or extra details</label>
+                  <textarea id="context-input" class="small-textarea" placeholder="Audience, purpose, preferred style, constraints..."></textarea>
+                </div>
+              </details>
+
+              <details class="setting-accordion">
+                <summary>
+                  <span><b>☷</b> Output Rules</span>
+                  <small>Control the final response</small>
+                  <i>⌄</i>
+                </summary>
+
+                <div class="accordion-body">
+                  <label for="output-format">Preferred output format</label>
+                  <select id="output-format">
+                    <option>Choose the most useful format</option>
+                    <option>Step-by-step instructions</option>
+                    <option>Detailed explanation</option>
+                    <option>Complete code with comments</option>
+                    <option>Bullet points</option>
+                    <option>Professional document</option>
+                    <option>Short and concise answer</option>
+                  </select>
+
+                  <label class="check-line">
+                    <input type="checkbox" id="include-steps" checked>
+                    Ask the AI to explain important steps
+                  </label>
+
+                  <label class="check-line">
+                    <input type="checkbox" id="include-questions" checked>
+                    Ask clarifying questions if essential details are missing
+                  </label>
+                </div>
+              </details>
+            </div>
+
+            <div class="generate-row">
+              <span class="secure-note">✧ Your prompt is yours. Copy and use it anywhere.</span>
+              <button class="generate-button" id="generate-button">
+                <span>Generate Prompt</span><b>✦</b>
+              </button>
+            </div>
+
+            <div class="inline-error" id="builder-error" role="status"></div>
+          </div>
+
+          <aside class="result-card glass-card">
+            <div class="result-header">
+              <div>
+                <div class="section-index">02 <span>YOUR RESULT</span></div>
+                <h2>Prompt Preview</h2>
+              </div>
+              <span class="result-status"><i></i> READY</span>
+            </div>
+
+            <div id="empty-result" class="empty-result">
+              <div class="result-illustration">
+                <span>✧</span><i>✦</i><b>✧</b>
+              </div>
+              <h3>Your masterpiece starts here</h3>
+              <p>Your refined English prompt will appear here. Add your idea and hit Generate Prompt.</p>
+              <div class="result-chips">
+                <span>Clear</span><span>Structured</span><span>AI-ready</span>
+              </div>
+            </div>
+
+            <div id="result-output" class="result-output" hidden>
+              <div class="result-meta">
+                <span>✦ ENGLISH PROMPT</span>
+                <span id="result-time">Just now</span>
+              </div>
+              <pre id="prompt-text"></pre>
+              <div class="result-actions">
+                <button id="copy-prompt" class="copy-button">▣ &nbsp; Copy prompt</button>
+                <button id="download-prompt" class="secondary-button">↓</button>
+              </div>
+            </div>
+
+            <div class="result-footer">
+              <span>⚡</span> Designed for ChatGPT, Gemini, Claude & more
+            </div>
+          </aside>
+        </section>
+
+        <section id="chat-view" class="simple-view" hidden>
+          <div class="glass-card simple-card">
+            <div class="section-index">QUICK ASSISTANT</div>
+            <h2>Prompt chat</h2>
+            <p>Describe what you want to improve and generate a fresh prompt from your message.</p>
+            <textarea id="chat-input" placeholder="Tell us what you want to create..."></textarea>
+            <button class="generate-button" id="chat-generate">Generate a prompt ↗</button>
+            <div id="chat-result" class="chat-result" hidden></div>
+          </div>
+        </section>
+
+        <section id="history-view" class="simple-view" hidden>
+          <div class="glass-card simple-card">
+            <div class="section-index">YOUR WORKSPACE</div>
+            <h2>Prompt history</h2>
+            <p>Your recent generated prompts are saved in this browser.</p>
+            <div id="history-list" class="history-list"></div>
+          </div>
+        </section>
+
+        <footer class="app-footer">
+          <span>© 2025 PromptGen AI</span>
+          <span>Think it. Say it. Prompt it.</span>
+        </footer>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
